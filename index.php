@@ -59,8 +59,8 @@ require_once CORE_PATH . '/Request.php';
 require_once CORE_PATH . '/Response.php';
 require_once CORE_PATH . '/Database.php';
 require_once CORE_PATH . '/View.php';
-require_once CONTROLLERS_PATH . '/Controller.php';
-require_once MODELS_PATH . '/Model.php';
+require_once CORE_PATH . '/Controller.php';
+require_once CORE_PATH . '/Model.php';
 
 // ໂຫຼດການຕັ້ງຄ່າເສັ້ນທາງ
 if (file_exists(ROOT_PATH . '/routes/web.php')) {
