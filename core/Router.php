@@ -12,6 +12,11 @@ class Router
         'PUT' => [],
         'DELETE' => []
     ];
+    
+    // ເພີ່ມຕົວແປສຳລັບເກັບ middleware
+    protected $middlewares = [];
+    protected $routeMiddlewares = [];
+    protected $lastRoute = null;
 
     /**
      * ເພີ່ມເສັ້ນທາງ GET
@@ -19,6 +24,7 @@ class Router
     public function get($path, $controller, $action)
     {
         $this->addRoute('GET', $path, $controller, $action);
+        return $this;
     }
 
     /**
@@ -27,6 +33,7 @@ class Router
     public function post($path, $controller, $action)
     {
         $this->addRoute('POST', $path, $controller, $action);
+        return $this;
     }
 
     /**
@@ -35,6 +42,7 @@ class Router
     public function put($path, $controller, $action)
     {
         $this->addRoute('PUT', $path, $controller, $action);
+        return $this;
     }
 
     /**
@@ -43,6 +51,7 @@ class Router
     public function delete($path, $controller, $action)
     {
         $this->addRoute('DELETE', $path, $controller, $action);
+        return $this;
     }
 
     /**
@@ -57,6 +66,53 @@ class Router
             'controller' => $controller,
             'action' => $action
         ];
+        
+        // ບັນທຶກເສັ້ນທາງຫຼ້າສຸດສຳລັບການກຳນົດ middleware
+        $this->lastRoute = [
+            'method' => $method,
+            'path' => $path
+        ];
+    }
+    
+    /**
+     * ລົງທະບຽນ middleware ທົ່ວໄປ
+     */
+    public function middleware($middleware)
+    {
+        $this->middlewares[] = $middleware;
+        return $this;
+    }
+    
+    /**
+     * ກຳນົດ middleware ສຳລັບເສັ້ນທາງສະເພາະ
+     */
+    public function with($middleware)
+    {
+        if ($this->lastRoute) {
+            $method = $this->lastRoute['method'];
+            $path = $this->lastRoute['path'];
+            
+            if (!isset($this->routeMiddlewares[$method][$path])) {
+                $this->routeMiddlewares[$method][$path] = [];
+            }
+            
+            $this->routeMiddlewares[$method][$path][] = $middleware;
+        }
+        
+        return $this;
+    }
+
+    /**
+     * ຮັບ middlewares ທັງໝົດສຳລັບເສັ້ນທາງທີ່ກຳນົດ
+     */
+    public function getMiddlewares($method, $path)
+    {
+        $globalMiddlewares = $this->middlewares;
+        $routeMiddlewares = isset($this->routeMiddlewares[$method][$path]) 
+            ? $this->routeMiddlewares[$method][$path] 
+            : [];
+            
+        return array_merge($globalMiddlewares, $routeMiddlewares);
     }
 
     /**
@@ -78,7 +134,8 @@ class Router
             return [
                 'controller' => $route['controller'],
                 'action' => $route['action'],
-                'params' => []
+                'params' => [],
+                'path' => $url
             ];
         }
 
@@ -101,7 +158,8 @@ class Router
                 return [
                     'controller' => $handlers['controller'],
                     'action' => $handlers['action'],
-                    'params' => $matches
+                    'params' => $matches,
+                    'path' => $route
                 ];
             }
         }
@@ -118,7 +176,8 @@ class Router
             return [
                 'controller' => $controller,
                 'action' => $action,
-                'params' => $params
+                'params' => $params,
+                'path' => $url
             ];
         }
         // ຮູບແບບ: controller
@@ -128,7 +187,8 @@ class Router
             return [
                 'controller' => $controller,
                 'action' => 'index',
-                'params' => []
+                'params' => [],
+                'path' => $url
             ];
         }
 

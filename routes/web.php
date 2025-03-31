@@ -10,11 +10,11 @@ $router = App::getInstance()->getRouter();
 
 // ກຳນົດເສັ້ນທາງ URL
 // ໜ້າຫຼັກ
-$router->get('', 'Home', 'index');
+$router->get('', 'Home', 'index')->with('AuthMiddleware');;
 $router->get('home', 'Home', 'index');
 
 // ເສັ້ນທາງສຳລັບຜູ້ໃຊ້
-$router->get('user', 'User', 'index');
+$router->get('user', 'User', 'index')->with('AuthMiddleware');
 $router->get('user/create', 'User', 'create');
 $router->post('user/store', 'User', 'store');
 $router->get('user/show/:id', 'User', 'show');

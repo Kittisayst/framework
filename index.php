@@ -12,6 +12,7 @@ define('MODELS_PATH', ROOT_PATH . '/models');
 define('VIEWS_PATH', ROOT_PATH . '/views');
 define('CONFIG_PATH', ROOT_PATH . '/config');
 define('HELPERS_PATH', ROOT_PATH . '/helpers');
+define('MIDDLEWARES_PATH', ROOT_PATH . '/middlewares');
 
 // ໂຫຼດໄຟລ໌ຕັ້ງຄ່າສະພາບແວດລ້ອມ
 $env = [];
@@ -47,6 +48,9 @@ if (isset($env['TIMEZONE'])) {
     date_default_timezone_set('UTC');
 }
 
+// ເລີ່ມ session
+session_start();
+
 // ໂຫຼດຟັງຊັນຊ່ວຍເຫຼືອ
 if (file_exists(HELPERS_PATH . '/functions.php')) {
     require_once HELPERS_PATH . '/functions.php';
@@ -61,6 +65,7 @@ require_once CORE_PATH . '/Database.php';
 require_once CORE_PATH . '/View.php';
 require_once CORE_PATH . '/Controller.php';
 require_once CORE_PATH . '/Model.php';
+require_once CORE_PATH . '/Middleware.php';
 
 // ໂຫຼດການຕັ້ງຄ່າເສັ້ນທາງ
 if (file_exists(ROOT_PATH . '/routes/web.php')) {
