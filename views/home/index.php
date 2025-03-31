@@ -44,7 +44,7 @@
                 </div>
                 <div class="card-body text-start">
                     <pre class="mb-0"><code># ຄັດລອກໂຄດ framework ຈາກ GitHub
-git clone https://github.com/yourusername/framework.git
+git clone https://github.com/Kittisayst/framework.git
 
 # ຕັ້ງຄ່າໄຟລ໌ .env
 cp .env.example .env

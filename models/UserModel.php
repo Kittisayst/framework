@@ -28,8 +28,8 @@ class UserModel extends Model
      */
     public function search($keyword)
     {
-        $sql = "SELECT * FROM {$this->table} WHERE name LIKE :keyword OR email LIKE :keyword";
-        return $this->db->query($sql, [':keyword' => "%$keyword%"]);
+        $sql = "SELECT * FROM {$this->table} WHERE name LIKE ? OR email LIKE ?";
+        return $this->db->query($sql, ["%$keyword%", "%$keyword%"]);
     }
 
     /**
