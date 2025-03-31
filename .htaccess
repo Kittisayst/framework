@@ -1,0 +1,27 @@
+# ເປີດໃຊ້ງານ mod_rewrite
+RewriteEngine On
+
+# ຖ້າຄຳຂໍບໍ່ແມ່ນໄຟລ໌ຫຼືໂຟລເດີທີ່ມີຢູ່ແລ້ວ
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# ສົ່ງທຸກຄຳຂໍໄປຍັງ index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# ປ້ອງກັນການເຂົ້າເຖິງໄຟລ໌ .env
+<Files .env>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# ປ້ອງກັນການເຂົ້າເຖິງໂຟລເດີ
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
+
+# ຕັ້ງຄ່າຄວາມປອດໄພເພີ່ມເຕີມ
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

@@ -1,0 +1,93 @@
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1><?= $pageTitle ?></h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?= getenv('APP_URL') ?>">ໜ້າຫຼັກ</a></li>
+                <li class="breadcrumb-item"><a href="<?= getenv('APP_URL') ?>/user">ຜູ້ໃຊ້</a></li>
+                <li class="breadcrumb-item active">ແກ້ໄຂ: <?= $user['name'] ?></li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h5 class="card-title mb-0">ແກ້ໄຂຂໍ້ມູນຜູ້ໃຊ້</h5>
+            </div>
+            <div class="card-body">
+                <?php if (isset($errors) && !empty($errors)): ?>
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            <?php foreach ($errors as $field => $fieldErrors): ?>
+                                <?php foreach ($fieldErrors as $error): ?>
+                                    <li><?= $error ?></li>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
+                <form action="<?= getenv('APP_URL') ?>/user/update/<?= $user['id'] ?>" method="post">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">ຊື່ <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name"
+                            value="<?= $user['name'] ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">ອີເມລ <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            value="<?= $user['email'] ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">ລະຫັດຜ່ານ <small class="text-muted">(ປະຫວ່າງໄວ້ຖ້າບໍ່ຕ້ອງການປ່ຽນ)</small></label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label">ບົດບາດ</label>
+                        <select class="form-select" id="role" name="role">
+                            <option value="user" <?= $user['role'] === 'user' ? 'selected' : '' ?>>ຜູ້ໃຊ້ທົ່ວໄປ</option>
+                            <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>ຜູ້ດູແລລະບົບ</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="status" class="form-label">ສະຖານະ</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="active" <?= $user['status'] === 'active' ? 'selected' : '' ?>>ໃຊ້ງານ</option>
+                            <option value="inactive" <?= $user['status'] === 'inactive' ? 'selected' : '' ?>>ປິດໃຊ້ງານ</option>
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">ບັນທຶກການແກ້ໄຂ</button>
+                        <a href="<?= getenv('APP_URL') ?>/user/show/<?= $user['id'] ?>" class="btn btn-secondary">ຍົກເລີກ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">ຄຳແນະນຳ</h5>
+            </div>
+            <div class="card-body">
+                <p>ຂໍ້ມູນທີ່ສາມາດແກ້ໄຂໄດ້:</p>
+                <ul>
+                    <li><strong>ຊື່:</strong> ຊື່ຜູ້ໃຊ້ (ຢ່າງໜ້ອຍ 3 ຕົວອັກສອນ)</li>
+                    <li><strong>ອີເມລ:</strong> ອີເມລທີ່ຖືກຕ້ອງ (ຕ້ອງບໍ່ຊ້ຳກັບຜູ້ໃຊ້ອື່ນ)</li>
+                    <li><strong>ລະຫັດຜ່ານ:</strong> ປະຫວ່າງໄວ້ຖ້າບໍ່ຕ້ອງການປ່ຽນ</li>
+                    <li><strong>ບົດບາດ:</strong> ກຳນົດສິດການໃຊ້ງານຂອງຜູ້ໃຊ້</li>
+                    <li><strong>ສະຖານະ:</strong> ກຳນົດວ່າຜູ້ໃຊ້ສາມາດເຂົ້າສູ່ລະບົບໄດ້ຫຼືບໍ່</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
