@@ -8,9 +8,12 @@
 // ຮັບອອບເຈັກຂອງ Router ຈາກ App
 $router = App::getInstance()->getRouter();
 
+$router->middleware('LogMiddleware');
+$router->middleware('ErrorHandlerMiddleware');
+
 // ກຳນົດເສັ້ນທາງ URL
 // ໜ້າຫຼັກ
-$router->get('', 'Home', 'index')->with('AuthMiddleware');;
+$router->get('', 'Home', 'index')->with('LogMiddleware');;
 $router->get('home', 'Home', 'index');
 
 // ເສັ້ນທາງສຳລັບຜູ້ໃຊ້
