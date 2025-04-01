@@ -10,10 +10,23 @@ $router = App::getInstance()->getRouter();
 
 $router->middleware('LogMiddleware');
 $router->middleware('ErrorHandlerMiddleware');
+$router->middleware('CsrfMiddleware');
+
+// ເສັ້ນທາງທີ່ບໍ່ມີ middleware ເພີ່ມເຕີມ
+$router->get('test/no-middleware', 'Home', 'index');
+
+// ເສັ້ນທາງທີ່ໃຊ້ AuthMiddleware
+$router->get('test/auth', 'Home', 'index')->with('AuthMiddleware');
+
+// ເສັ້ນທາງທີ່ໃຊ້ GuestMiddleware
+$router->get('test/guest', 'Home', 'index')->with('GuestMiddleware');
+
+// ເສັ້ນທາງ POST ເພື່ອທົດສອບ CsrfMiddleware
+$router->post('test/csrf', 'Home', 'index')->with('CsrfMiddleware');
 
 // ກຳນົດເສັ້ນທາງ URL
 // ໜ້າຫຼັກ
-$router->get('', 'Home', 'index')->with('LogMiddleware');;
+$router->get('', 'Home', 'index')->with('LogMiddleware');
 $router->get('home', 'Home', 'index');
 
 // ເສັ້ນທາງສຳລັບຜູ້ໃຊ້

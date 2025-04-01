@@ -172,10 +172,10 @@ class Router
             }
         }
 
-        // ຖ້າບໍ່ພົບເສັ້ນທາງທີ່ກົງກັນ
+        // ຖ້າບໍ່ພົບເສັ້ນທາງທີ່ກົງກັນແບບຊັດເຈນ ຫຼືແບບມີຕົວແປ
+        // ໃຫ້ລອງໃຊ້ຮູບແບບ controller/action/params...
         $segments = explode('/', $url);
 
-        // ຮູບແບບ: controller/action/params...
         if (count($segments) >= 2) {
             $controller = ucfirst($segments[0]);
             $action = $segments[1];
@@ -185,7 +185,7 @@ class Router
                 'controller' => $controller,
                 'action' => $action,
                 'params' => $params,
-                'path' => $url
+                'path' => $url // ເຖິງແມ່ນວ່າຈະບໍ່ກົງກັນໂດຍກົງ, ພວກເຮົາສົ່ງ URL ໄປນຳ
             ];
         }
         // ຮູບແບບ: controller
@@ -196,7 +196,7 @@ class Router
                 'controller' => $controller,
                 'action' => 'index',
                 'params' => [],
-                'path' => $url
+                'path' => $url // ເຊັ່ນດຽວກັນ, ສົ່ງ URL ໄປນຳ
             ];
         }
 
