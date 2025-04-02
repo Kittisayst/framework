@@ -5,9 +5,19 @@
  * ການກຳນົດເສັ້ນທາງ URL ຂອງແອັບພລິເຄຊັນ
  */
 
-// ຮັບອອບເຈັກຂອງ Router ຈາກ App
-$router = App::getInstance()->getRouter();
+// ເລີ່ມຈັບເວລາການລົງທະບຽນເສັ້ນທາງ
+debug_timer_start('routes_registration');
 
+// ຮັບອອບເຈັກຂອງ Router ຈາກ App
+$app = App::getInstance();
+$router = $app->getRouter();
+
+// ບັນທຶກຂໍ້ມູນການລົງທະບຽນເສັ້ນທາງເລີ່ມຕົ້ນ
+if ($app->isDebug()) {
+    debug_log('Starting routes registration', 'Routes');
+}
+
+// ລົງທະບຽນ middleware ທົ່ວໄປ
 $router->middleware('LogMiddleware');
 $router->middleware('ErrorHandlerMiddleware');
 $router->middleware('CsrfMiddleware');
@@ -52,26 +62,37 @@ $router->delete('api/users/:id', 'Api/User', 'delete');
 // ຕົວຢ່າງການກຳນົດເສັ້ນທາງທີ່ມີຄວາມຊັບຊ້ອນ
 $router->get('blog/category/:category/post/:id', 'Blog', 'show');
 
-/**
- * ຕົວຢ່າງການກຳນົດເສັ້ນທາງເພີ່ມເຕີມ:
- *
- * $router->get('products', 'Product', 'index');
- * $router->get('products/:id', 'Product', 'show');
- * $router->get('products/category/:category', 'Product', 'category');
- * 
- * $router->get('cart', 'Cart', 'index');
- * $router->post('cart/add/:id', 'Cart', 'add');
- * $router->get('cart/remove/:id', 'Cart', 'remove');
- * 
- * $router->get('checkout', 'Checkout', 'index');
- * $router->post('checkout/process', 'Checkout', 'process');
- * 
- * $router->get('login', 'Auth', 'login');
- * $router->post('login', 'Auth', 'authenticate');
- * $router->get('logout', 'Auth', 'logout');
- * $router->get('register', 'Auth', 'register');
- * $router->post('register', 'Auth', 'store');
- */
+// ເພີ່ມເສັ້ນທາງສຳລັບການທົດສອບ debug
+$router->get('debug/info', 'Debug', 'info');
+$router->get('debug/request', 'Debug', 'request');
+$router->get('debug/env', 'Debug', 'env');
+$router->get('debug/routes', 'Debug', 'routes');
+$router->get('debug/query/:table', 'Debug', 'query');
+$router->get('debug/resources', 'Debug', 'resources');
+
+// ຈົບການຈັບເວລາການລົງທະບຽນເສັ້ນທາງ
+$routeRegTime = debug_timer_stop('routes_registration', false);
+
+// ບັນທຶກຂໍ້ມູນການລົງທະບຽນເສັ້ນທາງສົມບູນ
+if ($app->isDebug()) {
+    $routes = $router->getRoutes();
+    $routeCount = 0;
+    
+    foreach ($routes as $method => $methodRoutes) {
+        $routeCount += count($methodRoutes);
+    }
+    
+    debug_log([
+        'time' => $routeRegTime . ' ms',
+        'routes_count' => $routeCount,
+        'routes_by_method' => [
+            'GET' => count($routes['GET']),
+            'POST' => count($routes['POST']),
+            'PUT' => count($routes['PUT']),
+            'DELETE' => count($routes['DELETE'])
+        ]
+    ], 'Routes Registration Complete');
+}
 
 /**
  * ໝາຍເຫດ:

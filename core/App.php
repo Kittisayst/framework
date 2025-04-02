@@ -13,6 +13,7 @@ class App
     protected $action;
     protected $params = [];
     protected static $instance = null;
+    protected $debug = false;
 
     /**
      * Constructor
@@ -23,6 +24,14 @@ class App
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router();
+        
+        // ກຳນົດໂໝດ debug ຈາກຄ່າໃນ .env
+        $this->debug = (getenv('APP_DEBUG') === 'true');
+        
+        // ຖ້າເປີດໃຊ້ debug mode, ໃຫ້ເລີ່ມເກັບເວລາປະຕິບັດການທັງໝົດ
+        if ($this->debug) {
+            debug_timer_start('app_execution');
+        }
     }
 
     /**
@@ -51,12 +60,22 @@ class App
     public function run()
     {
         try {
+            // ບັນທຶກຂໍ້ມູນການຮ້ອງຂໍເຂົ້າໃນບັນທຶກ debug ຖ້າອະນຸຍາດໃຫ້ debug
+            if ($this->debug) {
+                debug_log($this->request, 'Incoming Request');
+            }
+            
             // ປະມວນຜົນຄຳຂໍ URL
             $url = $this->request->getUrl();
             $method = $this->request->getMethod();
-
+            
             // ຮັບເສັ້ນທາງທີ່ກົງກັບ URL
             $route = $this->router->match($url, $method);
+            
+            // ບັນທຶກຂໍ້ມູນເສັ້ນທາງທີ່ຄົ້ນພົບ
+            if ($this->debug) {
+                debug_log($route, 'Matched Route');
+            }
 
             if ($route) {
                 $this->controller = $route['controller'];
@@ -65,7 +84,17 @@ class App
 
                 // ຮຽກໃຊ້ middlewares
                 $middlewares = $this->router->getMiddlewares($method, $route['path']);
+                
+                // ບັນທຶກຂໍ້ມູນ middlewares ທີ່ຈະໃຊ້
+                if ($this->debug) {
+                    debug_log($middlewares, 'Middlewares');
+                }
 
+                // ເລີ່ມຈັບເວລາປະຕິບັດງານຂອງ middlewares
+                if ($this->debug) {
+                    debug_timer_start('middlewares_execution');
+                }
+                
                 foreach ($middlewares as $middlewareName) {
                     $middlewareFile = MIDDLEWARES_PATH . '/' . $middlewareName . '.php';
 
@@ -74,36 +103,86 @@ class App
 
                         $middlewareClass = $middlewareName;
                         $middleware = new $middlewareClass();
+                        
+                        // ເລີ່ມຈັບເວລາສຳລັບແຕ່ລະ middleware
+                        if ($this->debug) {
+                            debug_timer_start('middleware_' . $middlewareName);
+                        }
 
                         $result = $middleware->handle($this->request);
+                        
+                        // ຈົບເວລາສຳລັບແຕ່ລະ middleware
+                        if ($this->debug) {
+                            $time = debug_timer_stop('middleware_' . $middlewareName, false);
+                            debug_log("Middleware $middlewareName executed in $time ms", 'Middleware Timing');
+                        }
 
                         // ຖ້າ middleware ສົ່ງຄືນ Response, ໃຫ້ສົ່ງ response ນັ້ນເລີຍ
                         if ($result instanceof Response) {
+                            if ($this->debug) {
+                                debug_log("Response returned from middleware: $middlewareName", 'Middleware Response');
+                                $this->logExecutionTime();
+                            }
                             $result->send();
                             return;
                         }
 
                         // ຖ້າ middleware ສົ່ງຄືນ false, ຢຸດການປະມວນຜົນ
                         if ($result === false) {
+                            if ($this->debug) {
+                                debug_log("Execution stopped by middleware: $middlewareName", 'Middleware Halt');
+                                $this->logExecutionTime();
+                            }
                             return;
                         }
                     }
+                }
+                
+                // ຈົບເວລາການປະຕິບັດງານຂອງ middlewares
+                if ($this->debug) {
+                    $time = debug_timer_stop('middlewares_execution', false);
+                    debug_log("All middlewares executed in $time ms", 'Middlewares Complete');
                 }
 
                 // ກວດສອບວ່າຄລາສ controller ມີຢູ່ຫຼືບໍ່
                 $controllerFile = CONTROLLERS_PATH . '/' . $this->controller . 'Controller.php';
                 $controllerClass = $this->controller . 'Controller';
+                
+                if ($this->debug) {
+                    debug_log("Loading controller: $controllerClass from $controllerFile", 'Controller Load');
+                }
 
                 if (file_exists($controllerFile)) {
                     require_once $controllerFile;
 
                     if (class_exists($controllerClass)) {
+                        // ເລີ່ມຈັບເວລາການສ້າງອອບເຈັກ controller
+                        if ($this->debug) {
+                            debug_timer_start('controller_instantiation');
+                        }
+                        
                         $controllerObj = new $controllerClass();
+                        
+                        if ($this->debug) {
+                            $time = debug_timer_stop('controller_instantiation', false);
+                            debug_log("Controller instantiated in $time ms", 'Controller Creation');
+                        }
 
                         // ກວດສອບວ່າມີເມທອດທີ່ຕ້ອງການຫຼືບໍ່
                         if (method_exists($controllerObj, $this->action)) {
+                            // ເລີ່ມຈັບເວລາການປະຕິບັດງານຂອງ controller action
+                            if ($this->debug) {
+                                debug_timer_start('controller_action');
+                                debug_log("Executing action: {$this->action} with params: " . json_encode($this->params), 'Controller Action');
+                            }
+                            
                             // ເອີ້ນໃຊ້ເມທອດກັບພາລາມິເຕີທີ່ຕ້ອງການ
                             $response = call_user_func_array([$controllerObj, $this->action], $this->params);
+                            
+                            if ($this->debug) {
+                                $time = debug_timer_stop('controller_action', false);
+                                debug_log("Action executed in $time ms", 'Controller Action Complete');
+                            }
 
                             // ຖ້າ controller ສົ່ງຄືນ Response, ໃຫ້ນຳໃຊ້ response ນັ້ນ
                             if ($response instanceof Response) {
@@ -118,34 +197,100 @@ class App
                                         $middleware = new $middlewareClass();
 
                                         if (method_exists($middleware, 'afterController')) {
+                                            if ($this->debug) {
+                                                debug_timer_start('after_middleware_' . $middlewareName);
+                                            }
+                                            
                                             $response = $middleware->afterController($this->request, $response);
+                                            
+                                            if ($this->debug) {
+                                                $time = debug_timer_stop('after_middleware_' . $middlewareName, false);
+                                                debug_log("After-controller middleware $middlewareName executed in $time ms", 'After Middleware');
+                                            }
                                         }
                                     }
                                 }
+                                
+                                if ($this->debug) {
+                                    debug_log("Sending response", 'Response');
+                                    $this->logExecutionTime();
+                                }
 
                                 $response->send();
+                            } else if ($this->debug) {
+                                debug_log("Warning: Action did not return a Response object", 'Controller Action Warning');
+                                $this->logExecutionTime();
                             }
                         } else {
                             $this->response->setStatusCode(404);
-                            $this->renderError('ບໍ່ພົບເມທອດ: ' . $this->action);
+                            $errorMsg = 'ບໍ່ພົບເມທອດ: ' . $this->action;
+                            
+                            if ($this->debug) {
+                                debug_log($errorMsg, 'Error');
+                            }
+                            
+                            $this->renderError($errorMsg);
                         }
                     } else {
                         $this->response->setStatusCode(404);
-                        $this->renderError('ບໍ່ພົບຄລາສ controller: ' . $controllerClass);
+                        $errorMsg = 'ບໍ່ພົບຄລາສ controller: ' . $controllerClass;
+                        
+                        if ($this->debug) {
+                            debug_log($errorMsg, 'Error');
+                        }
+                        
+                        $this->renderError($errorMsg);
                     }
                 } else {
                     $this->response->setStatusCode(404);
-                    $this->renderError('ບໍ່ພົບໄຟລ໌ controller: ' . $controllerFile);
+                    $errorMsg = 'ບໍ່ພົບໄຟລ໌ controller: ' . $controllerFile;
+                    
+                    if ($this->debug) {
+                        debug_log($errorMsg, 'Error');
+                    }
+                    
+                    $this->renderError($errorMsg);
                 }
             } else {
                 $this->response->setStatusCode(404);
-                $this->renderError('ບໍ່ພົບເສັ້ນທາງສຳລັບ: ' . $url);
+                $errorMsg = 'ບໍ່ພົບເສັ້ນທາງສຳລັບ: ' . $url;
+                
+                if ($this->debug) {
+                    debug_log($errorMsg, 'Error');
+                }
+                
+                $this->renderError($errorMsg);
             }
         } catch (Exception $e) {
             // ຈັດການຂໍ້ຜິດພາດທົ່ວໄປ
             $this->response->setStatusCode(500);
+            
+            if ($this->debug) {
+                debug_log($e, 'Exception');
+            }
+            
             $this->renderError($e->getMessage(), $e);
         }
+        
+        // ບັນທຶກເວລາການປະຕິບັດງານທັງໝົດ (ຈະຖືກປະຕິບັດຖ້າບໍ່ມີການເອີ້ນໃຊ້ $response->send())
+        if ($this->debug) {
+            $this->logExecutionTime();
+        }
+    }
+    
+    /**
+     * ບັນທຶກເວລາປະຕິບັດການຂອງ application ທັງໝົດ
+     */
+    protected function logExecutionTime()
+    {
+        $time = debug_timer_stop('app_execution', false);
+        debug_log("Total application execution time: $time ms", 'Application Timing');
+        
+        // ບັນທຶກການໃຊ້ຊັບພະຍາກອນ
+        debug_log([
+            'memory_usage' => formatBytes(memory_get_usage()),
+            'memory_peak' => formatBytes(memory_get_peak_usage()),
+        ], 'Resource Usage');
     }
 
     /**
@@ -153,6 +298,10 @@ class App
      */
     protected function renderError($message, $exception = null)
     {
+        if ($this->debug) {
+            debug_log("Rendering error: $message", 'Error Rendering');
+        }
+        
         if (file_exists(VIEWS_PATH . '/error.php')) {
             $error = $message;
             
@@ -174,6 +323,10 @@ class App
                      ', Line: ' . $exception->getLine() . 
                      "\nTrace:\n" . $exception->getTraceAsString() . '</pre>';
             }
+        }
+        
+        if ($this->debug) {
+            $this->logExecutionTime();
         }
     }
 
@@ -199,5 +352,22 @@ class App
     public function getRouter()
     {
         return $this->router;
+    }
+    
+    /**
+     * ຕັ້ງຄ່າໂໝດ debug
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = (bool) $debug;
+        return $this;
+    }
+    
+    /**
+     * ກວດສອບວ່າກຳລັງຢູ່ໃນໂໝດ debug ຫຼືບໍ່
+     */
+    public function isDebug()
+    {
+        return $this->debug;
     }
 }
