@@ -80,33 +80,37 @@ class View
      */
     public function render($template, $data = [])
     {
-        // ລວມຂໍ້ມູນ
-        $this->data = array_merge($this->data, $data);
+        try {
+            // ລວມຂໍ້ມູນ
+            $this->data = array_merge($this->data, $data);
 
-        // ເສັ້ນທາງເຕັມຂອງເທມເພລດ
-        $templatePath = $this->resolvePath($template);
+            // ເສັ້ນທາງເຕັມຂອງເທມເພລດ
+            $templatePath = $this->resolvePath($template);
 
-        if (!file_exists($templatePath)) {
-            throw new Exception("ບໍ່ພົບເທມເພລດ: $template");
-        }
+            if (!file_exists($templatePath)) {
+                throw new Exception("ບໍ່ພົບເທມເພລດ: $template ($templatePath)");
+            }
 
-        // ເລີ່ມການບັນທຶກເອົາຜົນລັບ
-        ob_start();
+            // ເລີ່ມການບັນທຶກເອົາຜົນລັບ
+            ob_start();
 
-        // ແຍກຕົວແປອອກມາໃຫ້ສາມາດໃຊ້ໄດ້ໃນເທມເພລດ
-        extract($this->data);
+            // ແຍກຕົວແປອອກມາໃຫ້ສາມາດໃຊ້ໄດ້ໃນເທມເພລດ
+            extract($this->data);
 
-        // ໂຫຼດເທມເພລດແລະປະຕິບັດ
-        require $templatePath;
+            // ໂຫຼດເທມເພລດແລະປະຕິບັດ
+            require $templatePath;
 
-        // ຮັບເນື້ອຫາຂອງເທມເພລດ
-        $content = ob_get_clean();
+            // ຮັບເນື້ອຫາຂອງເທມເພລດ
+            $content = ob_get_clean();
 
-        // ຖ້າມີການກຳນົດ layout ໃຫ້ໂຫຼດ layout ນັ້ນແລະໃສ່ເນື້ອຫາຂອງເທມເພລດເຂົ້າໄປ
-        if ($this->layout !== null) {
-            $layoutPath = $this->resolveLayoutPath($this->layout);
+            // ຖ້າມີການກຳນົດ layout ໃຫ້ໂຫຼດ layout ນັ້ນແລະໃສ່ເນື້ອຫາຂອງເທມເພລດເຂົ້າໄປ
+            if ($this->layout !== null) {
+                $layoutPath = $this->resolveLayoutPath($this->layout);
 
-            if (file_exists($layoutPath)) {
+                if (!file_exists($layoutPath)) {
+                    throw new Exception("ບໍ່ພົບໄຟລ໌ layout: {$this->layout} ($layoutPath)");
+                }
+
                 ob_start();
                 extract($this->data);
 
@@ -117,9 +121,21 @@ class View
 
                 $content = ob_get_clean();
             }
-        }
 
-        return $content;
+            return $content;
+        } catch (Exception $e) {
+            // ແຈ້ງເຕືອນຂໍ້ຜິດພາດ
+            if (getenv('APP_DEBUG') === 'true') {
+                echo '<div style="color: red; background: #f8d7da; padding: 10px; border: 1px solid #f5c6cb; border-radius: 5px; margin: 10px 0;">';
+                echo '<strong>View Error:</strong> ' . $e->getMessage();
+                echo '</div>';
+            }
+
+            // ບັນທຶກຂໍ້ຜິດພາດ
+            error_log('View Error: ' . $e->getMessage());
+
+            return '';
+        }
     }
 
     /**
@@ -137,7 +153,7 @@ class View
     {
         // ຖ້າເທມເພລດມີ .php ຕໍ່ທ້າຍແລ້ວ
         if (strpos($template, '.php') !== false) {
-           return "{$this->layoutPath}/{$template}.php";
+            return "{$this->viewPath}/" . $template;
         }
 
         // ຖ້າບໍ່ມີໃຫ້ເພີ່ມ .php ຕໍ່ທ້າຍ
@@ -151,7 +167,7 @@ class View
     {
         // ຖ້າ layout ມີ .php ຕໍ່ທ້າຍແລ້ວ
         if (strpos($layout, '.php') !== false) {
-            return "{$this->layoutPath}/{$layout}.php";
+            return "{$this->layoutPath}/" . $layout;
         }
 
         // ຖ້າບໍ່ມີໃຫ້ເພີ່ມ .php ຕໍ່ທ້າຍ
@@ -243,6 +259,15 @@ class View
      */
     public static function useFlash()
     {
-        
+        $flash = isset($_SESSION['flash']) ? $_SESSION['flash'] : null;
+
+        if ($flash) {
+            echo '<div class="alert alert-' . $flash['type'] . ' alert-dismissible fade show" role="alert">';
+            echo $flash['message'];
+            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+            echo '</div>';
+
+            unset($_SESSION['flash']);
+        }
     }
 }

@@ -54,24 +54,6 @@ class Controller
     }
 
     /**
-     * ເຮັດການ redirect ໄປຍັງ URL
-     */
-    protected function redirect($url, $statusCode = 302)
-    {
-        $response = new Response();
-        return $response->redirect($this->generateUrl($url));
-    }
-
-    /**
-     * ເຮັດການ redirect ໄປຍັງເສັ້ນທາງພາຍໃນແອັບພລິເຄຊັນ
-     */
-    protected function redirectToRoute($route, $params = [], $statusCode = 302)
-    {
-        $url = $this->generateUrl($route, $params);
-        $this->redirect($url, $statusCode);
-    }
-
-    /**
      * ສ້າງ URL ຈາກເສັ້ນທາງພາຍໃນແອັບພລິເຄຊັນ
      */
     protected function generateUrl($route, $params = [])
@@ -84,6 +66,55 @@ class Controller
         }
 
         return $url;
+    }
+
+    /**
+     * ເຮັດການ redirect ໄປຍັງ URL
+     */
+    protected function redirect($route, $statusCode = 302)
+    {
+        return $this->response->redirect($this->generateUrl($route), $statusCode);
+    }
+
+    /**
+     * ເຮັດການ redirect ພ້ອມຂໍ້ຄວາມ flash
+     */
+    protected function redirectWith($route, $type, $message, $statusCode = 302)
+    {
+        return $this->response->with($type, $message)
+                             ->redirect($this->generateUrl($route), $statusCode);
+    }
+
+    /**
+     * ເຮັດການ redirect ພ້ອມຂໍ້ຄວາມ flash ສຳເລັດ
+     */
+    protected function redirectWithSuccess($route, $message, $statusCode = 302)
+    {
+        return $this->redirectWith($route, 'success', $message, $statusCode);
+    }
+
+    /**
+     * ເຮັດການ redirect ພ້ອມຂໍ້ຄວາມ flash ຂໍ້ມູນ
+     */
+    protected function redirectWithInfo($route, $message, $statusCode = 302)
+    {
+        return $this->redirectWith($route, 'info', $message, $statusCode);
+    }
+
+    /**
+     * ເຮັດການ redirect ພ້ອມຂໍ້ຄວາມ flash ເຕືອນ
+     */
+    protected function redirectWithWarning($route, $message, $statusCode = 302)
+    {
+        return $this->redirectWith($route, 'warning', $message, $statusCode);
+    }
+
+    /**
+     * ເຮັດການ redirect ພ້ອມຂໍ້ຄວາມ flash ຜິດພາດ
+     */
+    protected function redirectWithError($route, $message, $statusCode = 302)
+    {
+        return $this->redirectWith($route, 'danger', $message, $statusCode);
     }
 
     /**
@@ -176,10 +207,72 @@ class Controller
                             $errors[$field][] = "$field ຕ້ອງເປັນຕົວອັກສອນຫຼືຕົວເລກເທົ່ານັ້ນ";
                         }
                         break;
+
+                    case 'match':
+                        if (isset($data[$field]) && isset($data[$ruleParam]) && $data[$field] !== $data[$ruleParam]) {
+                            $errors[$field][] = "$field ຕ້ອງກົງກັບ $ruleParam";
+                        }
+                        break;
                 }
             }
         }
 
         return $errors;
+    }
+
+    /**
+     * ເຮັດການ validate ຂໍ້ມູນຟອມ ແລະ ສົ່ງຄືນຄ່າຂໍ້ຜິດພາດຖ້າມີ
+     * ຫຼືຂໍ້ມູນທີ່ຜ່ານການກວດສອບແລ້ວຖ້າບໍ່ມີຂໍ້ຜິດພາດ
+     */
+    protected function validateForm($rules, $redirectRoute = null)
+    {
+        // ຮັບຂໍ້ມູນຈາກຟອມ
+        $data = $this->getFormData();
+        
+        // ບັນທຶກຂໍ້ມູນເຂົ້າ session ເພື່ອສະແດງຄືນໃນກໍລະນີທີ່ມີຂໍ້ຜິດພາດ
+        setSession('old_input', $data);
+        
+        // ກວດສອບຂໍ້ມູນຕາມກົດທີ່ກຳນົດ
+        $errors = $this->validate($data, $rules);
+        
+        // ຖ້າມີຂໍ້ຜິດພາດ ແລະ ມີການລະບຸ route ສຳລັບ redirect
+        if (!empty($errors) && $redirectRoute !== null) {
+            // ບັນທຶກຂໍ້ຜິດພາດເຂົ້າ session
+            setSession('errors', $errors);
+            
+            // redirect ກັບໄປໜ້າຟອມພ້ອມກັບຂໍ້ຄວາມຜິດພາດ
+            return $this->redirectWithError($redirectRoute, 'ກະລຸນາກວດສອບຂໍ້ມູນທີ່ປ້ອນ');
+        }
+        
+        // ສົ່ງຄືນຂໍ້ຜິດພາດ ຫຼື ຂໍ້ມູນທີ່ຜ່ານການກວດສອບແລ້ວ
+        return [
+            'data' => $data,
+            'errors' => $errors,
+            'isValid' => empty($errors)
+        ];
+    }
+
+    /**
+     * ສົ່ງຄືນຂໍ້ຄວາມຕອບກັບແບບສຳເລັດ
+     */
+    protected function success($message, $data = [], $statusCode = 200)
+    {
+        return $this->response->sendJson([
+            'success' => true,
+            'message' => $message,
+            'data' => $data
+        ], $statusCode);
+    }
+
+    /**
+     * ສົ່ງຄືນຂໍ້ຄວາມຕອບກັບແບບຜິດພາດ
+     */
+    protected function error($message, $errors = [], $statusCode = 400)
+    {
+        return $this->response->sendJson([
+            'success' => false,
+            'message' => $message,
+            'errors' => $errors
+        ], $statusCode);
     }
 }

@@ -2,10 +2,6 @@
     <div class="card shadow-sm col-md-3">
         <div class="card-body p-4">
             <h1 class="text-center mb-4 h3">Sign in</h1>
-            <?php
-                var_dump($_SESSION);
-            ?>
-
             <?php View::useFlash() ?>
 
             <form action="<?= getenv('APP_URL') ?>/auth/login" method="post">

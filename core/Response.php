@@ -179,9 +179,53 @@ class Response
         exit;
     }
 
+    /**
+     * ຕັ້ງຄ່າຂໍ້ຄວາມ flash ແລະ ສົ່ງຄືນ instance ນີ້
+     */
     public function with($type, $message)
     {
         setFlash($message, $type);
         return $this;
+    }
+
+    /**
+     * ຕັ້ງຄ່າຂໍ້ຄວາມ flash ປະເພດ success
+     */
+    public function withSuccess($message)
+    {
+        return $this->with('success', $message);
+    }
+
+    /**
+     * ຕັ້ງຄ່າຂໍ້ຄວາມ flash ປະເພດ info
+     */
+    public function withInfo($message)
+    {
+        return $this->with('info', $message);
+    }
+
+    /**
+     * ຕັ້ງຄ່າຂໍ້ຄວາມ flash ປະເພດ warning
+     */
+    public function withWarning($message)
+    {
+        return $this->with('warning', $message);
+    }
+
+    /**
+     * ຕັ້ງຄ່າຂໍ້ຄວາມ flash ປະເພດ danger (error)
+     */
+    public function withError($message)
+    {
+        return $this->with('danger', $message);
+    }
+
+    /**
+     * ເຮັດການ redirect ພ້ອມຂໍ້ຄວາມ flash
+     */
+    public function redirectWith($url, $type, $message, $statusCode = 302)
+    {
+        $this->with($type, $message);
+        $this->redirect($url, $statusCode);
     }
 }

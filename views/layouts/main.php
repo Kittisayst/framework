@@ -11,23 +11,6 @@
 
     <!-- Custom CSS -->
     <link href="<?= getenv('APP_URL') ?>/public/css/style.css" rel="stylesheet">
-    
-    <!-- CSS ສຳລັບ sticky footer -->
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        
-        main {
-            flex: 1 0 auto;
-        }
-        
-        footer {
-            flex-shrink: 0;
-        }
-    </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
