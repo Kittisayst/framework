@@ -155,7 +155,6 @@ class DebugController extends Controller
     public function routes()
     {
         $router = App::getInstance()->getRouter();
-        var_dump($router);
         $routes = $router->getRoutes();
 
         // ແປງຂໍ້ມູນເສັ້ນທາງໃຫ້ເປັນຮູບແບບທີ່ເໝາະກັບ view

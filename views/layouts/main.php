@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="lo">
+<html lang="lo" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,26 @@
 
     <!-- Custom CSS -->
     <link href="<?= getenv('APP_URL') ?>/public/css/style.css" rel="stylesheet">
+    
+    <!-- CSS ສຳລັບ sticky footer -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex: 1 0 auto;
+        }
+        
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
@@ -35,21 +52,23 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container">
-        <?php if (isset($flashMessage)): ?>
-            <div class="alert alert-<?= $flashMessage['type'] ?> alert-dismissible fade show" role="alert">
-                <?= $flashMessage['message'] ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
+    <main class="flex-grow-1">
+        <div class="container">
+            <?php if (isset($flashMessage)): ?>
+                <div class="alert alert-<?= $flashMessage['type'] ?> alert-dismissible fade show" role="alert">
+                    <?= $flashMessage['message'] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php endif; ?>
 
-        <?= $content ?>
-    </div>
+            <?= $content ?>
+        </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="mt-5 py-3 bg-light">
+    <footer class="py-3 bg-light mt-auto">
         <div class="container text-center">
-            <p>&copy; <?= date('Y') ?> My PHP Framework</p>
+            <p class="mb-0">&copy; <?= date('Y') ?> My PHP Framework</p>
         </div>
     </footer>
 

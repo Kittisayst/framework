@@ -3,8 +3,7 @@
 class LogMiddleware extends Middleware
 {
     public function handle(Request $request)
-    {
-        var_dump($request);
+    {        
         // ຮັບຂໍ້ມູນທີ່ຕ້ອງການບັນທຶກ
         $method = $request->getMethod();
         $url = $request->getUrl();
