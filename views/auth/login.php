@@ -2,7 +2,9 @@
     <div class="card shadow-sm col-md-3">
         <div class="card-body p-4">
             <h1 class="text-center mb-4 h3">Sign in</h1>
-            <?php View::useFlash() ?>
+            <?php
+            View::useFlash();
+            ?>
 
             <form action="<?= View::url('/auth/login') ?>" method="post">
                 <input type="hidden" name="csrf_token" value="<?= session('csrf_token') ?>">
