@@ -4,7 +4,7 @@
             <h1 class="text-center mb-4 h3">Sign in</h1>
             <?php View::useFlash() ?>
 
-            <form action="<?= getenv('APP_URL') ?>/auth/login" method="post">
+            <form action="<?= View::url('/auth/login') ?>" method="post">
                 <input type="hidden" name="csrf_token" value="<?= session('csrf_token') ?>">
                 <div class="mb-3">
                     <input type="email" class="form-control" name="email" placeholder="Email"

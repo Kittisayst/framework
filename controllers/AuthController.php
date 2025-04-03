@@ -31,13 +31,14 @@ class AuthController extends Controller
     public function login()
     {
         // ຖ້າບໍ່ແມ່ນ POST request, ໃຫ້ກັບຄືນໄປໜ້າ login
-        if ($this->request->getMethod() !== 'POST') {
+        if (!$this->isPost()) {
             return $this->redirect('auth');
         }
 
         // ຮັບຂໍ້ມູນຈາກຟອມ
-        $email = $this->request->post('email');
-        $password = $this->request->post('password');
+        $email = $this->post('email');
+        $password = $this->post('password');
+        $remember = $this->post('remember', false) ? true : false;
 
         // ກວດສອບວ່າປ້ອນຂໍ້ມູນຄົບຖ້ວນຫຼືບໍ່
         if (empty($email) || empty($password)) {

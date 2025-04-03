@@ -82,7 +82,7 @@ class Controller
     protected function redirectWith($route, $type, $message, $statusCode = 302)
     {
         return $this->response->with($type, $message)
-                             ->redirect($this->generateUrl($route), $statusCode);
+            ->redirect($this->generateUrl($route), $statusCode);
     }
 
     /**
@@ -147,6 +147,139 @@ class Controller
 
         return [];
     }
+
+
+    /**
+     * ກວດສອບວ່າເປັນຄຳຂໍແບບ GET ຫຼືບໍ່
+     */
+    protected function isGet()
+    {
+        return $this->request->getMethod() === 'GET';
+    }
+
+    /**
+     * ກວດສອບວ່າເປັນຄຳຂໍແບບ POST ຫຼືບໍ່
+     */
+    protected function isPost()
+    {
+        return $this->request->getMethod() === 'POST';
+    }
+
+    /**
+     * ກວດສອບວ່າເປັນຄຳຂໍແບບ PUT ຫຼືບໍ່
+     */
+    protected function isPut()
+    {
+        return $this->request->getMethod() === 'PUT';
+    }
+
+    /**
+     * ກວດສອບວ່າເປັນຄຳຂໍແບບ DELETE ຫຼືບໍ່
+     */
+    protected function isDelete()
+    {
+        return $this->request->getMethod() === 'DELETE';
+    }
+
+    /**
+     * ກວດສອບວ່າເປັນຄຳຂໍ AJAX ຫຼືບໍ່
+     */
+    protected function isAjax()
+    {
+        return $this->request->isAjax();
+    }
+
+    /**
+     * ດຶງຂໍ້ມູນຈາກຄຳຂໍ POST
+     * 
+     * @param string $key ຊື່ຂອງ field ທີ່ຕ້ອງການດຶງຂໍ້ມູນ
+     * @param mixed $default ຄ່າເລີ່ມຕົ້ນຖ້າບໍ່ພົບຂໍ້ມູນ
+     * @return mixed
+     */
+    protected function post($key = null, $default = null)
+    {
+        return $this->request->post($key, $default);
+    }
+
+    /**
+     * ດຶງຂໍ້ມູນຈາກຄຳຂໍ GET
+     * 
+     * @param string $key ຊື່ຂອງ parameter ທີ່ຕ້ອງການດຶງຂໍ້ມູນ
+     * @param mixed $default ຄ່າເລີ່ມຕົ້ນຖ້າບໍ່ພົບຂໍ້ມູນ
+     * @return mixed
+     */
+    protected function get($key = null, $default = null)
+    {
+        return $this->request->get($key, $default);
+    }
+
+    /**
+     * ດຶງຂໍ້ມູນຈາກຄຳຂໍທຸກປະເພດ (GET, POST, ຯລຯ)
+     * 
+     * @param string $key ຊື່ຂອງ field ທີ່ຕ້ອງການດຶງຂໍ້ມູນ
+     * @param mixed $default ຄ່າເລີ່ມຕົ້ນຖ້າບໍ່ພົບຂໍ້ມູນ
+     * @return mixed
+     */
+    protected function input($key, $default = null)
+    {
+        return $this->request->input($key, $default);
+    }
+
+    /**
+     * ດຶງຂໍ້ມູນທັງໝົດຈາກຄຳຂໍ
+     * 
+     * @return array
+     */
+    protected function all()
+    {
+        return $this->request->all();
+    }
+
+    /**
+     * ກວດສອບວ່າມີ field ນີ້ໃນຄຳຂໍຫຼືບໍ່
+     * 
+     * @param string $key ຊື່ຂອງ field ທີ່ຕ້ອງການກວດສອບ
+     * @return bool
+     */
+    protected function has($key)
+    {
+        return $this->request->has($key);
+    }
+
+    /**
+     * ດຶງຂໍ້ມູນຈາກຄຳຂໍ POST ຫຼາຍ fields ໃນຄັ້ງດຽວ
+     * 
+     * @param array $keys ລາຍຊື່ fields ທີ່ຕ້ອງການດຶງຂໍ້ມູນ
+     * @param array $defaults ຄ່າເລີ່ມຕົ້ນສຳລັບແຕ່ລະ field ຖ້າບໍ່ພົບຂໍ້ມູນ
+     * @return array
+     */
+    protected function only(array $keys, array $defaults = [])
+    {
+        $data = [];
+        foreach ($keys as $key) {
+            $default = isset($defaults[$key]) ? $defaults[$key] : null;
+            $data[$key] = $this->post($key, $default);
+        }
+        return $data;
+    }
+
+    /**
+     * ສະແດງໜ້າຟອມ (GET) ຫຼື ປະມວນຜົນຟອມ (POST)
+     * ຖ້າເປັນ GET ຈະເອີ້ນໃຊ້ callback showForm
+     * ຖ້າເປັນ POST ຈະເອີ້ນໃຊ້ callback processForm
+     */
+    protected function handleForm($showFormCallback, $processFormCallback)
+    {
+        if ($this->isGet()) {
+            return call_user_func($showFormCallback);
+        } elseif ($this->isPost()) {
+            return call_user_func($processFormCallback);
+        }
+
+        // ຖ້າບໍ່ແມ່ນທັງ GET ຫຼື POST, ໃຫ້ redirect ກັບໄປໜ້າຫຼັກ
+        return $this->redirectWithError('home', 'ຄຳຂໍບໍ່ຖືກຕ້ອງ');
+    }
+
 
     /**
      * ກວດສອບຄວາມຖືກຕ້ອງຂອງຂໍ້ມູນແບບຟອມ
@@ -228,22 +361,22 @@ class Controller
     {
         // ຮັບຂໍ້ມູນຈາກຟອມ
         $data = $this->getFormData();
-        
+
         // ບັນທຶກຂໍ້ມູນເຂົ້າ session ເພື່ອສະແດງຄືນໃນກໍລະນີທີ່ມີຂໍ້ຜິດພາດ
         setSession('old_input', $data);
-        
+
         // ກວດສອບຂໍ້ມູນຕາມກົດທີ່ກຳນົດ
         $errors = $this->validate($data, $rules);
-        
+
         // ຖ້າມີຂໍ້ຜິດພາດ ແລະ ມີການລະບຸ route ສຳລັບ redirect
         if (!empty($errors) && $redirectRoute !== null) {
             // ບັນທຶກຂໍ້ຜິດພາດເຂົ້າ session
             setSession('errors', $errors);
-            
+
             // redirect ກັບໄປໜ້າຟອມພ້ອມກັບຂໍ້ຄວາມຜິດພາດ
             return $this->redirectWithError($redirectRoute, 'ກະລຸນາກວດສອບຂໍ້ມູນທີ່ປ້ອນ');
         }
-        
+
         // ສົ່ງຄືນຂໍ້ຜິດພາດ ຫຼື ຂໍ້ມູນທີ່ຜ່ານການກວດສອບແລ້ວ
         return [
             'data' => $data,

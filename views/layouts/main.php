@@ -29,6 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= getenv('APP_URL') ?>/user">ຜູ້ໃຊ້</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= View::url("/auth/logout") ?>">ອອກຈາກລະບົບ</a>
+                    </li>
                 </ul>
             </div>
         </div>

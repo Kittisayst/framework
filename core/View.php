@@ -175,6 +175,25 @@ class View
     }
 
     /**
+     * ສ້າງ URL ໂດຍໃຊ້ route
+     * 
+     * @param string $route ເສັ້ນທາງ URL
+     * @param array $params ພາລາມິເຕີ query string
+     * @return string
+     */
+    public static function url($route = '', $params = [])
+    {
+        $baseUrl = getenv('APP_URL') ?: 'http://localhost/framework';
+        $url = rtrim($baseUrl, '/') . '/' . trim($route, '/');
+
+        if (!empty($params)) {
+            $url .= '?' . http_build_query($params);
+        }
+
+        return $url;
+    }
+
+    /**
      * ລວມເທມເພລດອື່ນເຂົ້າມາໃນເທມເພລດປັດຈຸບັດ
      */
     public function include($template, $data = [])
