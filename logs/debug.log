@@ -2775,3 +2775,1108 @@
 --------------------------------------------------------------------------------
 [2025-04-03 01:48:45] [Controller Action] 'Executing action: routes with params: []'
 --------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Routes Registration Complete] Array
+(
+    [time] => 1.8 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [REDIRECT_STATUS] => 200
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_CACHE_CONTROL] => max-age=0
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => same-origin
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_REFERER] => http://localhost/framework/debug/resources
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 53242
+            [REDIRECT_URL] => /framework/debug/routes
+            [REDIRECT_QUERY_STRING] => url=debug/routes
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => url=debug/routes
+            [REQUEST_URI] => /framework/debug/routes
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743619839.0254
+            [REQUEST_TIME] => 1743619839
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/debug/routes
+    [url:protected] => debug/routes
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Matched Route] Array
+(
+    [controller] => Debug
+    [action] => routes
+    [params] => Array
+        (
+        )
+
+    [path] => debug/routes
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Middlewares] Array
+(
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Middlewares Complete] 'All middlewares executed in 0.01 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Controller Load] 'Loading controller: DebugController from C:\\wamp64\\www\\framework/controllers/DebugController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Controller Creation] 'Controller instantiated in 1.97 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:50:39] [Controller Action] 'Executing action: routes with params: []'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Routes Registration Complete] Array
+(
+    [time] => 0.41 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => same-origin
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_REFERER] => http://localhost/framework/debug/routes
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 53522
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => 
+            [REQUEST_URI] => /framework/
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743619863.2006
+            [REQUEST_TIME] => 1743619863
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/
+    [url:protected] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Matched Route] Array
+(
+    [controller] => Home
+    [action] => index
+    [params] => Array
+        (
+        )
+
+    [path] => home
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Middlewares] Array
+(
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Middlewares Complete] 'All middlewares executed in 0.01 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Controller Load] 'Loading controller: HomeController from C:\\wamp64\\www\\framework/controllers/HomeController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Controller Creation] 'Controller instantiated in 1.35 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:03] [Controller Action] 'Executing action: index with params: []'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Routes Registration Complete] Array
+(
+    [time] => 0.48 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_CACHE_CONTROL] => max-age=0
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => same-origin
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_REFERER] => http://localhost/framework/debug/routes
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 53525
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => 
+            [REQUEST_URI] => /framework/
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743619909.7467
+            [REQUEST_TIME] => 1743619909
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/
+    [url:protected] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Matched Route] Array
+(
+    [controller] => Home
+    [action] => index
+    [params] => Array
+        (
+        )
+
+    [path] => home
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Middlewares] Array
+(
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Middlewares Complete] 'All middlewares executed in 0.02 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Controller Load] 'Loading controller: HomeController from C:\\wamp64\\www\\framework/controllers/HomeController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Controller Creation] 'Controller instantiated in 1.61 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:51:49] [Controller Action] 'Executing action: index with params: []'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Routes Registration Complete] Array
+(
+    [time] => 0.7 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_CACHE_CONTROL] => max-age=0
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => same-origin
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_REFERER] => http://localhost/framework/debug/routes
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 56689
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => 
+            [REQUEST_URI] => /framework/
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743620132.9515
+            [REQUEST_TIME] => 1743620132
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/
+    [url:protected] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Matched Route] Array
+(
+    [controller] => Home
+    [action] => index
+    [params] => Array
+        (
+        )
+
+    [path] => home
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Middlewares] Array
+(
+    [0] => LogMiddleware
+    [1] => ErrorHandlerMiddleware
+    [2] => CsrfMiddleware
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Middleware Timing] 'Middleware LogMiddleware executed in 1.58 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Middleware Timing] 'Middleware ErrorHandlerMiddleware executed in 0.28 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Middleware Timing] 'Middleware CsrfMiddleware executed in 1.47 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Middlewares Complete] 'All middlewares executed in 16.56 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Controller Load] 'Loading controller: HomeController from C:\\wamp64\\www\\framework/controllers/HomeController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Controller Creation] 'Controller instantiated in 2.35 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:32] [Controller Action] 'Executing action: index with params: []'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Routes Registration Complete] Array
+(
+    [time] => 0.38 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+            [url] => debug/info
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [REDIRECT_STATUS] => 200
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => none
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 56851
+            [REDIRECT_URL] => /framework/debug/info
+            [REDIRECT_QUERY_STRING] => url=debug/info
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => url=debug/info
+            [REQUEST_URI] => /framework/debug/info
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743620146.9284
+            [REQUEST_TIME] => 1743620146
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/debug/info
+    [url:protected] => debug/info
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Matched Route] Array
+(
+    [controller] => Debug
+    [action] => info
+    [params] => Array
+        (
+        )
+
+    [path] => debug/info
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Middlewares] Array
+(
+    [0] => LogMiddleware
+    [1] => ErrorHandlerMiddleware
+    [2] => CsrfMiddleware
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Middleware Timing] 'Middleware LogMiddleware executed in 0.42 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Middleware Timing] 'Middleware ErrorHandlerMiddleware executed in 0.01 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Middleware Timing] 'Middleware CsrfMiddleware executed in 0.04 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Middlewares Complete] 'All middlewares executed in 1.41 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Controller Load] 'Loading controller: DebugController from C:\\wamp64\\www\\framework/controllers/DebugController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Controller Creation] 'Controller instantiated in 22.23 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:46] [Controller Action] 'Executing action: info with params: []'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Routes Registration Complete] Array
+(
+    [time] => 0.56 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+            [url] => debug/routes
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [REDIRECT_STATUS] => 200
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => same-origin
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_REFERER] => http://localhost/framework/debug/info
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 56995
+            [REDIRECT_URL] => /framework/debug/routes
+            [REDIRECT_QUERY_STRING] => url=debug/routes
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => url=debug/routes
+            [REQUEST_URI] => /framework/debug/routes
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743620159.7836
+            [REQUEST_TIME] => 1743620159
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/debug/routes
+    [url:protected] => debug/routes
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Matched Route] Array
+(
+    [controller] => Debug
+    [action] => routes
+    [params] => Array
+        (
+        )
+
+    [path] => debug/routes
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Middlewares] Array
+(
+    [0] => LogMiddleware
+    [1] => ErrorHandlerMiddleware
+    [2] => CsrfMiddleware
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Middleware Timing] 'Middleware LogMiddleware executed in 0.51 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Middleware Timing] 'Middleware ErrorHandlerMiddleware executed in 0.9 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Middleware Timing] 'Middleware CsrfMiddleware executed in 0.06 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Middlewares Complete] 'All middlewares executed in 2.72 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Controller Load] 'Loading controller: DebugController from C:\\wamp64\\www\\framework/controllers/DebugController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Controller Creation] 'Controller instantiated in 1.01 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:55:59] [Controller Action] 'Executing action: routes with params: []'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Routes Registration Complete] Array
+(
+    [time] => 0.38 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => same-origin
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_REFERER] => http://localhost/framework/debug/routes
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 58035
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => 
+            [REQUEST_URI] => /framework/
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743620248.7908
+            [REQUEST_TIME] => 1743620248
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/
+    [url:protected] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Matched Route] Array
+(
+    [controller] => Home
+    [action] => index
+    [params] => Array
+        (
+        )
+
+    [path] => home
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Middlewares] Array
+(
+    [0] => LogMiddleware
+    [1] => ErrorHandlerMiddleware
+    [2] => CsrfMiddleware
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Middleware Timing] 'Middleware LogMiddleware executed in 1.69 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Middleware Timing] 'Middleware ErrorHandlerMiddleware executed in 0.03 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Middleware Timing] 'Middleware CsrfMiddleware executed in 0.05 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Middlewares Complete] 'All middlewares executed in 3.08 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Controller Load] 'Loading controller: HomeController from C:\\wamp64\\www\\framework/controllers/HomeController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Controller Creation] 'Controller instantiated in 21.96 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:28] [Controller Action] 'Executing action: index with params: []'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Routes Registration Complete] Array
+(
+    [time] => 0.34 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+            [url] => test/auth
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [REDIRECT_STATUS] => 200
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => none
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en; PHPSESSID=ien3v5p6ol41frfrng87vtk06u
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 58333
+            [REDIRECT_URL] => /framework/test/auth
+            [REDIRECT_QUERY_STRING] => url=test/auth
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => url=test/auth
+            [REQUEST_URI] => /framework/test/auth
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743620273.601
+            [REQUEST_TIME] => 1743620273
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+            [PHPSESSID] => ien3v5p6ol41frfrng87vtk06u
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/test/auth
+    [url:protected] => test/auth
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Matched Route] Array
+(
+    [controller] => Home
+    [action] => index
+    [params] => Array
+        (
+        )
+
+    [path] => test/auth
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Middlewares] Array
+(
+    [0] => LogMiddleware
+    [1] => ErrorHandlerMiddleware
+    [2] => CsrfMiddleware
+    [3] => AuthMiddleware
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Middleware Timing] 'Middleware LogMiddleware executed in 0.53 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Middleware Timing] 'Middleware ErrorHandlerMiddleware executed in 0.02 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 01:57:53] [Middleware Timing] 'Middleware CsrfMiddleware executed in 0.07 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Routes] 'Starting routes registration'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Routes Registration Complete] Array
+(
+    [time] => 0.89 ms
+    [routes_count] => 27
+    [routes_by_method] => Array
+        (
+            [GET] => 21
+            [POST] => 4
+            [PUT] => 1
+            [DELETE] => 1
+        )
+
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Incoming Request] Request Object
+(
+    [get:protected] => Array
+        (
+        )
+
+    [post:protected] => Array
+        (
+        )
+
+    [files:protected] => Array
+        (
+        )
+
+    [server:protected] => Array
+        (
+            [HTTP_HOST] => localhost
+            [HTTP_CONNECTION] => keep-alive
+            [HTTP_SEC_CH_UA] => "Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"
+            [HTTP_SEC_CH_UA_MOBILE] => ?0
+            [HTTP_SEC_CH_UA_PLATFORM] => "Windows"
+            [HTTP_UPGRADE_INSECURE_REQUESTS] => 1
+            [HTTP_USER_AGENT] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36
+            [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+            [HTTP_SEC_FETCH_SITE] => none
+            [HTTP_SEC_FETCH_MODE] => navigate
+            [HTTP_SEC_FETCH_USER] => ?1
+            [HTTP_SEC_FETCH_DEST] => document
+            [HTTP_ACCEPT_ENCODING] => gzip, deflate, br, zstd
+            [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.9,th;q=0.8
+            [HTTP_COOKIE] => NEXT_LOCALE=en
+            [PATH] => c:\Users\LENOVO\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Google\Chrome\Application;C:\Program Files\OpenLogic\jdk-17.0.11.9-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Scripts;C:\Users\LENOVO\AppData\Local\Programs\Python\Python311\Lib\site-packages;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\wamp64\bin\php\php7.4.33;C:\ProgramData\ComposerSetup\bin;C:\apache-tomcat-10.1.31;C:\Prog;C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps
+            [SystemRoot] => C:\WINDOWS
+            [COMSPEC] => C:\WINDOWS\system32\cmd.exe
+            [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+            [WINDIR] => C:\WINDOWS
+            [SERVER_SIGNATURE] => <address>Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>
+
+            [SERVER_SOFTWARE] => Apache/2.4.54 (Win64) PHP/8.0.26 mod_fcgid/2.3.10-dev
+            [SERVER_NAME] => localhost
+            [SERVER_ADDR] => ::1
+            [SERVER_PORT] => 80
+            [REMOTE_ADDR] => ::1
+            [DOCUMENT_ROOT] => C:/wamp64/www
+            [REQUEST_SCHEME] => http
+            [CONTEXT_PREFIX] => 
+            [CONTEXT_DOCUMENT_ROOT] => C:/wamp64/www
+            [SERVER_ADMIN] => wampserver@wampserver.invalid
+            [SCRIPT_FILENAME] => C:/wamp64/www/framework/index.php
+            [REMOTE_PORT] => 59579
+            [GATEWAY_INTERFACE] => CGI/1.1
+            [SERVER_PROTOCOL] => HTTP/1.1
+            [REQUEST_METHOD] => GET
+            [QUERY_STRING] => 
+            [REQUEST_URI] => /framework/
+            [SCRIPT_NAME] => /framework/index.php
+            [PHP_SELF] => /framework/index.php
+            [REQUEST_TIME_FLOAT] => 1743655282.484
+            [REQUEST_TIME] => 1743655282
+        )
+
+    [cookies:protected] => Array
+        (
+            [NEXT_LOCALE] => en
+        )
+
+    [method:protected] => GET
+    [uri:protected] => /framework/
+    [url:protected] => 
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Matched Route] Array
+(
+    [controller] => Home
+    [action] => index
+    [params] => Array
+        (
+        )
+
+    [path] => home
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Middlewares] Array
+(
+    [0] => LogMiddleware
+    [1] => ErrorHandlerMiddleware
+    [2] => CsrfMiddleware
+)
+
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Middleware Timing] 'Middleware LogMiddleware executed in 1.17 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Middleware Timing] 'Middleware ErrorHandlerMiddleware executed in 0.04 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Middleware Timing] 'Middleware CsrfMiddleware executed in 0.04 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Middlewares Complete] 'All middlewares executed in 3.06 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Controller Load] 'Loading controller: HomeController from C:\\wamp64\\www\\framework/controllers/HomeController.php'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Controller Creation] 'Controller instantiated in 13.81 ms'
+--------------------------------------------------------------------------------
+[2025-04-03 11:41:22] [Controller Action] 'Executing action: index with params: []'
+--------------------------------------------------------------------------------
