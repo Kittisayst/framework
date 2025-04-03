@@ -54,11 +54,12 @@ class Controller
     }
 
     /**
-     * ເຮັດການ redirect ໄປຍັງ URL ໃໝ່
+     * ເຮັດການ redirect ໄປຍັງ URL
      */
     protected function redirect($url, $statusCode = 302)
     {
-        $this->response->redirect($url, $statusCode);
+        $response = new Response();
+        return $response->redirect($this->generateUrl($url));
     }
 
     /**

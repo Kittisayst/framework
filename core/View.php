@@ -111,7 +111,6 @@ class View
                 extract($this->data);
 
                 // ກຳນົດຕົວແປ $content ທີ່ຈະໃຊ້ໃນ layout
-                $content = $content;
                 $sections = $this->sections;
 
                 require $layoutPath;
@@ -138,11 +137,11 @@ class View
     {
         // ຖ້າເທມເພລດມີ .php ຕໍ່ທ້າຍແລ້ວ
         if (strpos($template, '.php') !== false) {
-            return $this->viewPath . '/' . $template;
+           return "{$this->layoutPath}/{$template}.php";
         }
 
         // ຖ້າບໍ່ມີໃຫ້ເພີ່ມ .php ຕໍ່ທ້າຍ
-        return $this->viewPath . '/' . $template . '.php';
+        return "{$this->viewPath}/{$template}.php";
     }
 
     /**
@@ -152,15 +151,15 @@ class View
     {
         // ຖ້າ layout ມີ .php ຕໍ່ທ້າຍແລ້ວ
         if (strpos($layout, '.php') !== false) {
-            return $this->layoutPath . '/' . $layout;
+            return "{$this->layoutPath}/{$layout}.php";
         }
 
         // ຖ້າບໍ່ມີໃຫ້ເພີ່ມ .php ຕໍ່ທ້າຍ
-        return $this->layoutPath . '/' . $layout . '.php';
+        return "{$this->layoutPath}/{$layout}.php";
     }
 
     /**
-     * ລວມເທມເພລດອື່ນເຂົ້າມາໃນເທມເພລດປັດຈຸບັນ
+     * ລວມເທມເພລດອື່ນເຂົ້າມາໃນເທມເພລດປັດຈຸບັດ
      */
     public function include($template, $data = [])
     {
@@ -201,5 +200,49 @@ class View
     public function escape($html)
     {
         return htmlspecialchars($html, ENT_QUOTES, 'UTF-8');
+    }
+
+    /**
+     * ສະແດງ component
+     */
+    public static function component($name, $data = [])
+    {
+        $view = new self();
+        $view->setLayout(null);
+        echo $view->render($name, $data);
+    }
+
+    /**
+     * ກວດສອບວ່າມີ Flash message ຫຼືບໍ່
+     */
+    public static function hasFlash($type)
+    {
+        return isset($_SESSION['flash'][$type]);
+    }
+
+    /**
+     * ເອົາ Flash message
+     */
+    public static function getFlash($type)
+    {
+        $message = $_SESSION['flash'][$type] ?? '';
+        unset($_SESSION['flash'][$type]);
+        return $message;
+    }
+
+    /**
+     * ເອົາຄ່າ old input
+     */
+    public static function useOld($key, $default = '')
+    {
+        return $_SESSION['old'][$key] ?? $default;
+    }
+
+    /**
+     * ສະແດງຂໍ້ຄວາມ Flash
+     */
+    public static function useFlash()
+    {
+        
     }
 }

@@ -21,7 +21,7 @@ class AuthMiddleware extends Middleware
             
             // ສ້າງ response ໃໝ່ແລະ redirect ໄປໜ້າ login
             $response = new Response();
-            $response->redirect(url('auth/login'));
+            $response->redirect(url('auth'));
             return $response;
         }
         

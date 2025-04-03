@@ -178,4 +178,10 @@ class Response
         readfile($filePath);
         exit;
     }
+
+    public function with($type, $message)
+    {
+        setFlash($message, $type);
+        return $this;
+    }
 }
