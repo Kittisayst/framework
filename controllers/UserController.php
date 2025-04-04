@@ -224,6 +224,6 @@ class UserController extends Controller
         $result = $this->userModel->delete($id);
 
         // Redirect ກັບໄປໜ້າລາຍການຜູ້ໃຊ້
-        $this->redirect($this->generateUrl('user'));
+        $this->redirectWithSuccess('users', 'ລຶບຜູ້ໃຊ້ສຳເລັດແລ້ວ');
     }
 }

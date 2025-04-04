@@ -1,4 +1,6 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
+    <a href="<?= View::route('debug.info') ?>">Debug Info</a>
+    <a href="<?= View::route('debug.env') ?>">Debug Env</a>
     <div class="card shadow-sm col-md-3">
         <div class="card-body p-4">
             <h1 class="text-center mb-4 h3">Sign in</h1>

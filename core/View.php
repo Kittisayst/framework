@@ -289,4 +289,9 @@ class View
             unset($_SESSION['flash']);
         }
     }
+
+    public static function route($name, $params = []) {
+        global $router;
+        return $router->route($name, $params);
+    }
 }

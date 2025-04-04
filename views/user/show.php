@@ -62,7 +62,7 @@
                     <a href="<?= getenv('APP_URL') ?>/user/edit/<?= $user['id'] ?>" class="btn btn-warning">
                         <i class="bi bi-pencil"></i> ແກ້ໄຂ
                     </a>
-                    <a href="<?= getenv('APP_URL') ?>/user/delete/<?= $user['id'] ?>"
+                    <a href="<?= View::url("user/delete/{$user['id']}") ?>"
                         class="btn btn-danger"
                         onclick="return confirm('ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບຜູ້ໃຊ້ນີ້?')">
                         <i class="bi bi-trash"></i> ລຶບ

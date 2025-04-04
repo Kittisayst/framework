@@ -24,6 +24,10 @@ class Router
     // ເພີ່ມຕົວແປນັບຈຳນວນເສັ້ນທາງ
     protected $routeCount = 0;
 
+    protected $prefix = '';
+    protected $cacheFile = 'bootfiles/cache/routes.cache.php';
+    protected $groupStack = [];
+
     /**
      * ເພີ່ມເສັ້ນທາງ GET
      * 
@@ -95,31 +99,31 @@ class Router
         // ສ້າງເສັ້ນທາງ CRUD ມາດຕະຖານ
         // GET /resource - index (ສະແດງລາຍການ)
         $this->get($name, $handler, is_array($handler) ? 'index' : null)
-            ->name($name . '.index');
+            ->name("{$name}.index");
 
         // GET /resource/create - create (ສະແດງຟອມສ້າງໃໝ່)
-        $this->get("$name/create", $handler, is_array($handler) ? 'create' : null)
-            ->name($name . '.create');
+        $this->get("{$name}/create", $handler, is_array($handler) ? 'create' : null)
+            ->name("{$name}.create");
 
         // POST /resource - store (ບັນທຶກຂໍ້ມູນໃໝ່)
         $this->post($name, $handler, is_array($handler) ? 'store' : null)
-            ->name($name . '.store');
+            ->name("{$name}.store");
 
         // GET /resource/:id - show (ສະແດງລາຍລະອຽດ)
-        $this->get("$name/{id}", $handler, is_array($handler) ? 'show' : null)
-            ->name($name . '.show');
+        $this->get("{$name}/{id}", $handler, is_array($handler) ? 'show' : null)
+            ->name("{$name}.show");
 
         // GET /resource/:id/edit - edit (ສະແດງຟອມແກ້ໄຂ)
-        $this->get("$name/{id}/edit", $handler, is_array($handler) ? 'edit' : null)
-            ->name($name . '.edit');
+        $this->get("{$name}/{id}/edit", $handler, is_array($handler) ? 'edit' : null)
+            ->name("{$name}.edit");
 
         // PUT /resource/:id - update (ອັບເດດຂໍ້ມູນ)
-        $this->put("$name/{id}", $handler, is_array($handler) ? 'update' : null)
-            ->name($name . '.update');
+        $this->put("{$name}/{id}", $handler, is_array($handler) ? 'update' : null)
+            ->name("{$name}.update");
 
         // DELETE /resource/:id - destroy (ລຶບຂໍ້ມູນ)
-        $this->delete("$name/{id}", $handler, is_array($handler) ? 'destroy' : null)
-            ->name($name . '.destroy');
+        $this->delete("{$name}/{id}", $handler, is_array($handler) ? 'destroy' : null)
+            ->name("{$name}.destroy");
 
         return $this;
     }
@@ -135,41 +139,37 @@ class Router
     protected function addRoute($method, $path, $handler, $action = null)
     {
         // ປ່ຽນເສັ້ນທາງໃຫ້ເປັນຮູບແບບປົກກະຕິ (normalize)
-        $path = trim($path, '/');
+        $path = $this->prefix
+            ? trim($this->prefix . '/' . trim($path, '/'), '/')
+            : trim($path, '/');
+
         if (empty($path)) {
             $path = '/';
         }
 
-        // ຖ້າ handler ເປັນ array, ແຍກເອົາ controller ແລະ action
+        // ຈັດການກັບ controller ແລະ action
         if (is_array($handler)) {
             $controller = $handler[0];
-            // ຖ້າບໍ່ໄດ້ກຳນົດ action ໃນ array, ໃຊ້ຄ່າເລີ່ມຕົ້ນ 'index'
-            $action = isset($handler[1]) ? $handler[1] : 'index';
+            $action = isset($handler[1]) ? $handler[1] : $action;
         } else {
             $controller = $handler;
-            // ຖ້າບໍ່ໄດ້ກຳນົດ action ແລະ handler ບໍ່ແມ່ນ array, ໃຊ້ຄ່າເລີ່ມຕົ້ນ 'index'
-            $action = $action ?: 'index';
         }
 
-        // ແທນທີ່ ClassName::class ດ້ວຍຊື່ຄລາສທີ່ແທ້ຈິງ
+        // ກວດສອບວ່າເປັນຄລາສຫຼືບໍ່ (ClassName::class)
         if (strpos($controller, '::class') !== false) {
             $controller = str_replace('::class', '', $controller);
         }
-        // ລຶບ "Controller" ອອກຈາກຊື່ຖ້າຜູ້ໃຊ້ລະບຸມາ (ເພາະຈະເພີ່ມໂດຍອັດຕະໂນມັດໃນພາຍຫຼັງ)
-        $controller = str_replace('Controller', '', $controller);
 
         $this->routes[$method][$path] = [
             'controller' => $controller,
             'action' => $action
         ];
 
-        // ບັນທຶກເສັ້ນທາງຫຼ້າສຸດສຳລັບການກຳນົດ middleware
         $this->lastRoute = [
             'method' => $method,
             'path' => $path
         ];
 
-        // ເພີ່ມຈຳນວນເສັ້ນທາງ
         $this->routeCount++;
     }
 
@@ -199,6 +199,7 @@ class Router
      * @param string $name ຊື່ເສັ້ນທາງ
      * @param array $params ພາລາມິເຕີທີ່ຈະແທນທີ່ໃນ URL
      * @return string URL ທີ່ສ້າງຂຶ້ນ
+     * @throws Exception ເມື່ອບໍ່ພົບເສັ້ນທາງທີ່ກຳນົດຊື່ໄວ້
      */
     public function route($name, $params = [])
     {
@@ -318,18 +319,17 @@ class Router
                 // ຕັ້ງຄ່າ params ໃຫ້ເປັນ associative array
                 $params = [];
 
-                // ຊອກຫາຊື່ພາລາມິເຕີ (ຊື່ທີ່ຢູ່ໃນວົງປີກກາຫຼືຕິດກັບເຄື່ອງໝາຍ :)
-                preg_match_all('/{([^}]+)}|:([^\/]+)', $route, $paramNames);
+                // ຊອກຫາຊື່ພາລາມິເຕີ
+                if (preg_match_all('/\{([^}]+)\}/', $route, $paramNames)) {
+                    $paramNames = $paramNames[1];
 
-                // ລວມຊື່ພາລາມິເຕີຈາກທັງສອງຮູບແບບ
-                $paramNames = array_filter(array_merge($paramNames[1], $paramNames[2]));
-
-                // ຈັດການກັບພາລາມິເຕີທີ່ມີຊື່
-                foreach ($matches as $key => $value) {
-                    if (is_string($key)) {
-                        $params[$key] = $value;
-                    } elseif (isset($paramNames[$key - 1])) {
-                        $params[$paramNames[$key - 1]] = $value;
+                    // ຈັດການກັບພາລາມິເຕີທີ່ມີຊື່
+                    foreach ($matches as $key => $value) {
+                        if (is_string($key)) {
+                            $params[$key] = $value;
+                        } elseif (isset($paramNames[$key - 1])) {
+                            $params[$paramNames[$key - 1]] = $value;
+                        }
                     }
                 }
 
@@ -342,35 +342,7 @@ class Router
             }
         }
 
-        // ຖ້າບໍ່ພົບເສັ້ນທາງທີ່ກົງກັນແບບຊັດເຈນ ຫຼືແບບມີຕົວແປ
-        // ໃຫ້ລອງໃຊ້ຮູບແບບ controller/action/params...
-        $segments = explode('/', $url);
-
-        if (count($segments) >= 2) {
-            $controller = ucfirst($segments[0]);
-            $action = $segments[1];
-            $params = array_slice($segments, 2);
-
-            return [
-                'controller' => $controller,
-                'action' => $action,
-                'params' => $params,
-                'path' => $url // ເຖິງແມ່ນວ່າຈະບໍ່ກົງກັນໂດຍກົງ, ພວກເຮົາສົ່ງ URL ໄປນຳ
-            ];
-        }
-        // ຮູບແບບ: controller
-        else if (count($segments) == 1) {
-            $controller = ucfirst($segments[0]);
-
-            return [
-                'controller' => $controller,
-                'action' => 'index',
-                'params' => [],
-                'path' => $url // ເຊັ່ນດຽວກັນ, ສົ່ງ URL ໄປນຳ
-            ];
-        }
-
-        return null;
+        throw new Exception("ບໍ່ພົບເສັ້ນທາງທີ່ກົງກັບ URL: $url");
     }
 
     /**
@@ -379,12 +351,89 @@ class Router
     protected function convertRouteToRegex($route)
     {
         // ແທນທີ່ຕົວແປໃນເສັ້ນທາງດ້ວຍຕົວປະກອບປົກກະຕິ
-        // ຮອງຮັບທັງຮູບແບບ {param} ແລະ :param
-        $regex = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '(?P<$1>[^/]+)', $route);
-        $regex = preg_replace('/:([a-zA-Z0-9_]+)/', '(?P<$1>[^/]+)', $regex);
+        $regex = preg_replace('/\{([^}]+)\}/', '(?P<$1>[^/]+)', $route);
 
         // ສ້າງຕົວປະກອບປົກກະຕິທີ່ສົມບູນ
         return '/^' . str_replace('/', '\/', $regex) . '$/';
+    }
+
+    /**
+     * ສ້າງ cache ສຳລັບເສັ້ນທາງ
+     */
+    public function cacheRoutes()
+    {
+        if (!is_dir(dirname($this->cacheFile))) {
+            mkdir(dirname($this->cacheFile), 0777, true);
+        }
+
+        $routes = [
+            'routes' => $this->routes,
+            'namedRoutes' => $this->namedRoutes,
+            'routeMiddlewares' => $this->routeMiddlewares
+        ];
+
+        file_put_contents($this->cacheFile, '<?php return ' . var_export($routes, true) . ';');
+    }
+
+    /**
+     * ໂຫຼດເສັ້ນທາງຈາກ cache
+     */
+    public function loadFromCache()
+    {
+        if (file_exists($this->cacheFile)) {
+            $cached = require $this->cacheFile;
+            $this->routes = $cached['routes'];
+            $this->namedRoutes = $cached['namedRoutes'];
+            $this->routeMiddlewares = $cached['routeMiddlewares'];
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * ຈັດກຸ່ມເສັ້ນທາງ
+     */
+    public function group(array $attributes, callable $callback)
+    {
+        $this->groupStack[] = $attributes;
+
+        // ເກັບຄ່າເກົ່າ
+        $previousPrefix = $this->prefix;
+        $previousMiddleware = $this->middlewares;
+
+        // ນຳໃຊ້ຄ່າໃໝ່
+        if (isset($attributes['prefix'])) {
+            $this->prefix = $previousPrefix
+                ? $previousPrefix . '/' . trim($attributes['prefix'], '/')
+                : trim($attributes['prefix'], '/');
+        }
+
+        if (isset($attributes['middleware'])) {
+            $this->middlewares = array_merge(
+                $this->middlewares,
+                (array) $attributes['middleware']
+            );
+        }
+
+        // ເອີ້ນໃຊ້ callback
+        $callback($this);
+
+        // ກັບຄືນຄ່າເກົ່າ
+        $this->prefix = $previousPrefix;
+        $this->middlewares = $previousMiddleware;
+
+        array_pop($this->groupStack);
+
+        return $this;
+    }
+
+    /**
+     * ກຳນົດ prefix ສຳລັບເສັ້ນທາງ
+     */
+    public function prefix($prefix)
+    {
+        $this->prefix = '/' . trim($prefix, '/');
+        return $this;
     }
 
     /**

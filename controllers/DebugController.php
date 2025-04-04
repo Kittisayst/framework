@@ -156,6 +156,7 @@ class DebugController extends Controller
     {
         $router = App::getInstance()->getRouter();
         $routes = $router->getRoutes();
+        $namedRoutes = $router->getNamedRoutes();
 
         // ແປງຂໍ້ມູນເສັ້ນທາງໃຫ້ເປັນຮູບແບບທີ່ເໝາະກັບ view
         $formattedRoutes = [];
@@ -167,10 +168,20 @@ class DebugController extends Controller
                 // ຮັບ middlewares ສຳລັບເສັ້ນທາງນີ້
                 $middlewareList = $router->getMiddlewares($method, $path);
 
+                // ຊອກຫາຊື່ເສັ້ນທາງ
+                $routeName = null;
+                foreach ($namedRoutes as $name => $namedRoute) {
+                    if ($namedRoute['method'] === $method && $namedRoute['path'] === $path) {
+                        $routeName = $name;
+                        break;
+                    }
+                }
+
                 // ເພີ່ມເສັ້ນທາງນີ້ເຂົ້າໃນລາຍການທີ່ຈັດຮູບແບບແລ້ວ
                 $formattedRoutes[] = [
                     'method' => $method,
                     'path' => $path,
+                    'name' => $routeName,
                     'controller' => $routeInfo['controller'],
                     'action' => $routeInfo['action'],
                     'middlewares' => $middlewareList

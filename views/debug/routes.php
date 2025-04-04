@@ -51,6 +51,7 @@
                             <tr>
                                 <th>Method</th>
                                 <th>PATH</th>
+                                <th>Name</th>
                                 <th>Controller</th>
                                 <th>Action</th>
                                 <th>Middlewares</th>
@@ -71,6 +72,13 @@
                                         ?>"><?= $route['method'] ?></span>
                                     </td>
                                     <td><code><?= $route['path'] ?></code></td>
+                                    <td>
+                                        <?php if ($route['name']): ?>
+                                            <span class="badge bg-info"><?= $route['name'] ?></span>
+                                        <?php else: ?>
+                                            <span class="text-muted">ບໍ່ມີ</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td><?= $route['controller'] ?></td>
                                     <td><?= $route['action'] ?></td>
                                     <td>
